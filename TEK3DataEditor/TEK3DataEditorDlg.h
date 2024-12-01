@@ -37,6 +37,7 @@ public:
 	BYTE* m_pSaveData;	// pointer to current savedata
 	int m_SaveData;		// savedata no; starting from 1
 	CString m_SaveDataPath;	// path of SAVEDAT.TEK3
+	HANDLE m_hSaveData;	// handle of the opened savedata. this will be kept open until end of the edit.
 	bool m_fDirtyData;	// true if change has been done since last save  / load
 	bool m_fDataReady;	// true if m_pAllData is valid
 

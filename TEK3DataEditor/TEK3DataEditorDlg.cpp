@@ -51,7 +51,7 @@ END_MESSAGE_MAP()
 
 
 CTEK3DataEditorDlg::CTEK3DataEditorDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_TEK3DATAEDITOR_DIALOG, pParent), m_pSaveData(NULL), m_fDirtyData(false), m_fDataReady(false)
+	: CDialogEx(IDD_TEK3DATAEDITOR_DIALOG, pParent), m_pSaveData(NULL), m_fDirtyData(false), m_fDataReady(false), m_hSaveData(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -193,26 +193,38 @@ void CTEK3DataEditorDlg::OnBnClickedButtonLoad()
 	LARGE_INTEGER li;
 	if (GetFileSizeEx(hTgt, &li) == 0) {
 		MessageBox("ファイルサイズの取得に失敗しました。ロードをキャンセルします。");
+		CloseHandle(hTgt);
 		return;
 	}
 	if (li.HighPart != 0 || li.LowPart != ALLDATASIZE) {
 		MessageBox("ファイルサイズが想定外です。ロードをキャンセルします。");
+		CloseHandle(hTgt);
 		return;
 	}
 
 	m_fDirtyData = false;
 	m_SaveDataPath = target;
 	m_fDataReady = false;
+	if (m_hSaveData) {
+		CloseHandle(m_hSaveData);
+	}
+	m_hSaveData = 0;
+
 	DWORD readData;
-	if (ReadFile(hTgt, m_pAllData, ALLDATASIZE, &readData, NULL) == 0) {
+	if (ReadFile(m_hSaveData, m_pAllData, ALLDATASIZE, &readData, NULL) == 0) {
 		MessageBox("ファイルの読み込みに失敗しました");
+		CloseHandle(m_hSaveData);
+		m_hSaveData = 0;
 		return;
 	}
 	if (readData != ALLDATASIZE) {
 		MessageBox("読み込んだデータサイズが想定と一致しませんでした。");
+		CloseHandle(m_hSaveData);
+		m_hSaveData = 0;
 		return;
 	}
 	m_fDataReady = true;
+	m_hSaveData = hTgt;
 	m_SaveData = 1;
 	ChangeSaveData();
 }
@@ -220,8 +232,13 @@ void CTEK3DataEditorDlg::OnBnClickedButtonLoad()
 void CTEK3DataEditorDlg::ChangeSaveData()
 {
 	if (m_SaveData < 1 || m_SaveData>10) {
-		MessageBox("m_SaveDataの値が範囲外です。終了します。");
-		exit(-1);
+		MessageBox("m_SaveDataの値が範囲外です。データを破棄します。");
+		m_fDataReady = false;
+		if (m_hSaveData) {
+			CloseHandle(m_hSaveData);
+			m_hSaveData = 0;
+		}
+		return;
 	}
 	m_pSaveData = m_pAllData + 100 + 51319 * (m_SaveData - 1);
 }
