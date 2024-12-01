@@ -32,6 +32,14 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
+	#define ALLDATASIZE (513290)
+	BYTE m_pAllData[ALLDATASIZE];	// copy of SAVEDAT.TK3
+	BYTE* m_pSaveData;	// pointer to current savedata
+	int m_SaveData;		// savedata no; starting from 1
+	CString m_SaveDataPath;	// path of SAVEDAT.TEK3
+	bool m_fDirtyData;	// true if change has been done since last save  / load
+	bool m_fDataReady;	// true if m_pAllData is valid
+
 	CButton m_CtrlButtonLoad;
 	CButton m_CtrlButtonSave;
 	CButton m_CtrlButtonDataSelect;
@@ -44,4 +52,7 @@ public:
 	CButton m_CtrlButtonNationEdit;
 	CButton m_CtrlButtonBaseEdit;
 	CStatic m_CtrlFrame;
+
+	afx_msg void OnBnClickedButtonLoad();
+	void ChangeSaveData();
 };

@@ -51,7 +51,7 @@ END_MESSAGE_MAP()
 
 
 CTEK3DataEditorDlg::CTEK3DataEditorDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_TEK3DATAEDITOR_DIALOG, pParent)
+	: CDialogEx(IDD_TEK3DATAEDITOR_DIALOG, pParent), m_pSaveData(NULL), m_fDirtyData(false), m_fDataReady(false)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -77,6 +77,7 @@ BEGIN_MESSAGE_MAP(CTEK3DataEditorDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON_LOAD, &CTEK3DataEditorDlg::OnBnClickedButtonLoad)
 END_MESSAGE_MAP()
 
 
@@ -165,3 +166,62 @@ HCURSOR CTEK3DataEditorDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+void CTEK3DataEditorDlg::OnBnClickedButtonLoad()
+{
+	if (m_fDirtyData) {
+		int ret = MessageBox("セーブデータをロードします。現在編集中のセーブデータを破棄してもよろしいですか？", "確認", MB_OKCANCEL);
+		if (ret == IDCANCEL) {
+			return;
+		}
+	}
+	CFileDialog fd(true, "TK3", "SAVEDAT.TK3", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, "TEK3 savedata|SAVEDAT.TK3|AllData|*.*||");
+	if (fd.DoModal() != IDOK) {
+		MessageBox("ロードをキャンセルしました");
+		return;
+	}
+	CString target = fd.GetPathName();
+	if (PathFileExists(target) == FALSE) {
+		MessageBox("ファイルが存在しません。ロードをキャンセルします。");
+		return;
+	}
+	HANDLE hTgt = CreateFile(target, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hTgt == INVALID_HANDLE_VALUE) {
+		MessageBox("ファイルを開けません。ロードをキャンセルします。");
+		return;
+	}
+	LARGE_INTEGER li;
+	if (GetFileSizeEx(hTgt, &li) == 0) {
+		MessageBox("ファイルサイズの取得に失敗しました。ロードをキャンセルします。");
+		return;
+	}
+	if (li.HighPart != 0 || li.LowPart != ALLDATASIZE) {
+		MessageBox("ファイルサイズが想定外です。ロードをキャンセルします。");
+		return;
+	}
+
+	m_fDirtyData = false;
+	m_SaveDataPath = target;
+	m_fDataReady = false;
+	DWORD readData;
+	if (ReadFile(hTgt, m_pAllData, ALLDATASIZE, &readData, NULL) == 0) {
+		MessageBox("ファイルの読み込みに失敗しました");
+		return;
+	}
+	if (readData != ALLDATASIZE) {
+		MessageBox("読み込んだデータサイズが想定と一致しませんでした。");
+		return;
+	}
+	m_fDataReady = true;
+	m_SaveData = 1;
+	ChangeSaveData();
+}
+
+void CTEK3DataEditorDlg::ChangeSaveData()
+{
+	if (m_SaveData < 1 || m_SaveData>10) {
+		MessageBox("m_SaveDataの値が範囲外です。終了します。");
+		exit(-1);
+	}
+	m_pSaveData = m_pAllData + 100 + 51319 * (m_SaveData - 1);
+}
