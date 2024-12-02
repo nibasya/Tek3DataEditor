@@ -7,6 +7,7 @@
 #define IDS_ABOUTBOX                    101
 #define IDD_TEK3DATAEDITOR_DIALOG       102
 #define IDR_MAINFRAME                   128
+#define IDD_DIALOG_DATANUM_SELECT       130
 #define IDC_BUTTON_LOAD                 1000
 #define IDC_BUTTON_DATA_SELECT          1001
 #define IDC_BUTTON_SHIPTYPE_EDIT        1002
@@ -22,16 +23,16 @@
 #define IDC_STATIC_FRAME                1011
 #define IDC_EDIT_FOLDER                 1012
 #define IDC_EDIT_TARGETDATA             1013
-#define IDC_EDIT3                       1014
 #define IDC_EDIT_CURRENTWORK            1014
+#define IDC_LIST_DATANUM_SELECT         1015
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_RESOURCE_VALUE        132
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1015
+#define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

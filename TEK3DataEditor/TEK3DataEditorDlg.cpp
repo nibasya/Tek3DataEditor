@@ -7,6 +7,7 @@
 #include "TEK3DataEditor.h"
 #include "TEK3DataEditorDlg.h"
 #include "afxdialogex.h"
+#include "CDataSelectDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -81,6 +82,7 @@ BEGIN_MESSAGE_MAP(CTEK3DataEditorDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_LOAD, &CTEK3DataEditorDlg::OnBnClickedButtonLoad)
+	ON_BN_CLICKED(IDC_BUTTON_DATA_SELECT, &CTEK3DataEditorDlg::OnBnClickedButtonDataSelect)
 END_MESSAGE_MAP()
 
 
@@ -253,4 +255,16 @@ void CTEK3DataEditorDlg::ChangeSaveData()
 	CString n;
 	n.Format("%d", m_SaveData);
 	m_CtrlEditTargetData.SetWindowText(n);
+}
+
+
+void CTEK3DataEditorDlg::OnBnClickedButtonDataSelect()
+{
+	CDataSelectDlg dlg;
+	dlg.m_pData = m_pAllData;
+	if (dlg.DoModal() != IDOK) {
+		return;
+	}
+	m_SaveData = dlg.m_Num + 1;
+	ChangeSaveData();
 }

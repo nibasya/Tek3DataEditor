@@ -59,4 +59,5 @@ public:
 	CEdit m_CtrlEditFolder;
 	CEdit m_CtrlEditTargetData;
 	CEdit m_CtrlEditCurrentWork;
+	afx_msg void OnBnClickedButtonDataSelect();
 };
