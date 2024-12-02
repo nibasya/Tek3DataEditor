@@ -56,4 +56,7 @@ public:
 
 	afx_msg void OnBnClickedButtonLoad();
 	void ChangeSaveData();
+	CEdit m_CtrlEditFolder;
+	CEdit m_CtrlEditTargetData;
+	CEdit m_CtrlEditCurrentWork;
 };

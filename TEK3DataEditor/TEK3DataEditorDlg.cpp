@@ -71,6 +71,9 @@ void CTEK3DataEditorDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_NATION_EDIT, m_CtrlButtonNationEdit);
 	DDX_Control(pDX, IDC_BUTTON_BASE_EDIT, m_CtrlButtonBaseEdit);
 	DDX_Control(pDX, IDC_STATIC_FRAME, m_CtrlFrame);
+	DDX_Control(pDX, IDC_EDIT_FOLDER, m_CtrlEditFolder);
+	DDX_Control(pDX, IDC_EDIT_TARGETDATA, m_CtrlEditTargetData);
+	DDX_Control(pDX, IDC_EDIT_CURRENTWORK, m_CtrlEditCurrentWork);
 }
 
 BEGIN_MESSAGE_MAP(CTEK3DataEditorDlg, CDialogEx)
@@ -208,7 +211,10 @@ void CTEK3DataEditorDlg::OnBnClickedButtonLoad()
 	if (m_hSaveData) {
 		CloseHandle(m_hSaveData);
 	}
-	m_hSaveData = 0;
+	m_hSaveData = hTgt;
+	m_CtrlEditFolder.Clear();
+	m_CtrlEditTargetData.Clear();
+	m_CtrlEditCurrentWork.Clear();
 
 	DWORD readData;
 	if (ReadFile(m_hSaveData, m_pAllData, ALLDATASIZE, &readData, NULL) == 0) {
@@ -224,7 +230,9 @@ void CTEK3DataEditorDlg::OnBnClickedButtonLoad()
 		return;
 	}
 	m_fDataReady = true;
-	m_hSaveData = hTgt;
+	CString folder = target;
+	PathRemoveFileSpecA(folder.GetBuffer());
+	m_CtrlEditFolder.SetWindowText(folder);
 	m_SaveData = 1;
 	ChangeSaveData();
 }
@@ -237,8 +245,12 @@ void CTEK3DataEditorDlg::ChangeSaveData()
 		if (m_hSaveData) {
 			CloseHandle(m_hSaveData);
 			m_hSaveData = 0;
+			m_CtrlEditTargetData.Clear();
 		}
 		return;
 	}
 	m_pSaveData = m_pAllData + 100 + 51319 * (m_SaveData - 1);
+	CString n;
+	n.Format("%d", m_SaveData);
+	m_CtrlEditTargetData.SetWindowText(n);
 }
