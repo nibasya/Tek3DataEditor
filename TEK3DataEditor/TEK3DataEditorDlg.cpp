@@ -71,11 +71,11 @@ void CTEK3DataEditorDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_PLANESQUAD_EDIT, m_CtrlButtonPlaneSquadEdit);
 	DDX_Control(pDX, IDC_BUTTON_NATION_EDIT, m_CtrlButtonNationEdit);
 	DDX_Control(pDX, IDC_BUTTON_BASE_EDIT, m_CtrlButtonBaseEdit);
-	DDX_Control(pDX, IDC_STATIC_FRAME, m_CtrlFrame);
 	DDX_Control(pDX, IDC_EDIT_FOLDER, m_CtrlEditFolder);
 	DDX_Control(pDX, IDC_EDIT_TARGETDATA, m_CtrlEditTargetData);
 	DDX_Control(pDX, IDC_EDIT_CURRENTWORK, m_CtrlEditCurrentWork);
 	DDX_Control(pDX, IDC_LIST_MAIN, m_CtrlListMain);
+	DDX_Control(pDX, IDC_BUTTON_TIME_EDIT, m_CtrlButtonDateTime);
 }
 
 BEGIN_MESSAGE_MAP(CTEK3DataEditorDlg, CDialogEx)

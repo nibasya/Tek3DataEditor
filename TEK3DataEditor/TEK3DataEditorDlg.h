@@ -53,7 +53,7 @@ public:
 	CButton m_CtrlButtonPlaneSquadEdit;
 	CButton m_CtrlButtonNationEdit;
 	CButton m_CtrlButtonBaseEdit;
-	CStatic m_CtrlFrame;
+	CButton m_CtrlButtonDateTime;
 
 	CEdit m_CtrlEditFolder;
 	CEdit m_CtrlEditTargetData;

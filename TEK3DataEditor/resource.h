@@ -21,11 +21,12 @@
 #define IDC_BUTTON_BASE_EDIT            1009
 #define IDC_BUTTON1_SAVE                1010
 #define IDC_STATIC_FRAME                1011
+#define IDC_BUTTON_BASE_EDIT2           1011
+#define IDC_BUTTON_TIME_EDIT            1011
 #define IDC_EDIT_FOLDER                 1012
 #define IDC_EDIT_TARGETDATA             1013
 #define IDC_EDIT_CURRENTWORK            1014
 #define IDC_LIST_DATANUM_SELECT         1015
-#define IDC_LIST1                       1016
 #define IDC_LIST_MAIN                   1016
 
 // Next default values for new objects
