@@ -42,11 +42,11 @@ BOOL CDataSelectDlg::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// TODO: ここに初期化を追加してください
-	m_CtrlListData.InsertColumn(0, "No.", LVCFMT_LEFT, LVSCW_AUTOSIZE);
-	m_CtrlListData.InsertColumn(1, "タイトル", LVCFMT_LEFT, LVSCW_AUTOSIZE);
-	m_CtrlListData.InsertColumn(2, "年/月/日 時", LVCFMT_LEFT, LVSCW_AUTOSIZE);
-	m_CtrlListData.InsertColumn(6, "自軍", LVCFMT_LEFT, LVSCW_AUTOSIZE);
-	m_CtrlListData.InsertColumn(7, "相手", LVCFMT_LEFT, LVSCW_AUTOSIZE);
+	m_CtrlListData.InsertColumn(0, "No.");
+	m_CtrlListData.InsertColumn(1, "タイトル");
+	m_CtrlListData.InsertColumn(2, "年/月/日 時");
+	m_CtrlListData.InsertColumn(3, "自軍");
+	m_CtrlListData.InsertColumn(4, "相手");
 	m_CtrlListData.SetItemCount(10);
 	m_CtrlListData.SetExtendedStyle(LVS_EX_FULLROWSELECT);
 

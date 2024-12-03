@@ -261,6 +261,11 @@ void CTEK3DataEditorDlg::ChangeSaveData()
 
 void CTEK3DataEditorDlg::OnBnClickedButtonDataSelect()
 {
+	if (!m_fDataReady) {
+		MessageBox("データをロードしてください");
+		return;
+	}
+
 	CDataSelectDlg dlg;
 	dlg.m_pData = m_pAllData;
 	if (dlg.DoModal() != IDOK) {
