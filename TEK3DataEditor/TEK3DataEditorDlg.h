@@ -40,6 +40,7 @@ public:
 	HANDLE m_hSaveData;	// handle of the opened savedata. this will be kept open until end of the edit.
 	bool m_fDirtyData;	// true if change has been done since last save  / load
 	bool m_fDataReady;	// true if m_pAllData is valid
+	enum EState {INITIAL, SHIPTYPE, SHIP, SHIPQUAD, PLANETYPE, PLANESTOCK, PLANESQUAD, NATION, BASE} m_State;
 
 	CButton m_CtrlButtonLoad;
 	CButton m_CtrlButtonSave;
@@ -54,10 +55,13 @@ public:
 	CButton m_CtrlButtonBaseEdit;
 	CStatic m_CtrlFrame;
 
-	afx_msg void OnBnClickedButtonLoad();
-	void ChangeSaveData();
 	CEdit m_CtrlEditFolder;
 	CEdit m_CtrlEditTargetData;
 	CEdit m_CtrlEditCurrentWork;
+
+	CListCtrl m_CtrlListMain;
+
+	afx_msg void OnBnClickedButtonLoad();
+	void ChangeSaveData();
 	afx_msg void OnBnClickedButtonDataSelect();
 };

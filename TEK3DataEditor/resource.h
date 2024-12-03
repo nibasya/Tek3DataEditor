@@ -25,6 +25,8 @@
 #define IDC_EDIT_TARGETDATA             1013
 #define IDC_EDIT_CURRENTWORK            1014
 #define IDC_LIST_DATANUM_SELECT         1015
+#define IDC_LIST1                       1016
+#define IDC_LIST_MAIN                   1016
 
 // Next default values for new objects
 // 
@@ -32,7 +34,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        132
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1016
+#define _APS_NEXT_CONTROL_VALUE         1017
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

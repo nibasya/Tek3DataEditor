@@ -52,7 +52,7 @@ END_MESSAGE_MAP()
 
 
 CTEK3DataEditorDlg::CTEK3DataEditorDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_TEK3DATAEDITOR_DIALOG, pParent), m_pSaveData(NULL), m_fDirtyData(false), m_fDataReady(false), m_hSaveData(0)
+	: CDialogEx(IDD_TEK3DATAEDITOR_DIALOG, pParent), m_pSaveData(NULL), m_fDirtyData(false), m_fDataReady(false), m_hSaveData(0), m_State(INITIAL)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -75,6 +75,7 @@ void CTEK3DataEditorDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_FOLDER, m_CtrlEditFolder);
 	DDX_Control(pDX, IDC_EDIT_TARGETDATA, m_CtrlEditTargetData);
 	DDX_Control(pDX, IDC_EDIT_CURRENTWORK, m_CtrlEditCurrentWork);
+	DDX_Control(pDX, IDC_LIST_MAIN, m_CtrlListMain);
 }
 
 BEGIN_MESSAGE_MAP(CTEK3DataEditorDlg, CDialogEx)
