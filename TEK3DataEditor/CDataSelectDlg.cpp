@@ -91,9 +91,9 @@ BOOL CDataSelectDlg::OnInitDialog()
 		}
 		m_CtrlListData.SetItem(i, 4, LVIF_TEXT, buff.GetString(), 0, 0, 0, 0);
 	}
-	m_CtrlListData.SetColumnWidth(0, 32);
-	for (int i = 1; i < 5; i++) {
-		m_CtrlListData.SetColumnWidth(i, LVSCW_AUTOSIZE);
+
+	for (int i = 0; i < 5; i++) {
+		m_CtrlListData.SetColumnWidth(i, LVSCW_AUTOSIZE_USEHEADER);
 	}
 
 	return TRUE;  // return TRUE unless you set the focus to a control

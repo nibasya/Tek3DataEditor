@@ -35,7 +35,7 @@ public:
 	#define ALLDATASIZE (513290)
 	BYTE m_pAllData[ALLDATASIZE];	// copy of SAVEDAT.TK3
 	BYTE* m_pSaveData;	// pointer to current savedata
-	int m_SaveData;		// savedata no; starting from 1
+	int m_SaveDataNum;		// savedata num; starting from 1
 	CString m_SaveDataPath;	// path of SAVEDAT.TEK3
 	HANDLE m_hSaveData;	// handle of the opened savedata. this will be kept open until end of the edit.
 	bool m_fDirtyData;	// true if change has been done since last save  / load
@@ -62,6 +62,61 @@ public:
 	CListCtrl m_CtrlListMain;
 
 	afx_msg void OnBnClickedButtonLoad();
-	void ChangeSaveData();
+	void ChangeSaveDataNum();
 	afx_msg void OnBnClickedButtonDataSelect();
+
+	/// <summary>
+	/// Converts value to string
+	/// </summary>
+	/// <param name="s"></param>
+	/// <returns>String of the value</returns>
+	CString UShortToString(unsigned short s);
+
+	/// <summary>
+	/// Converts Nation value to CString
+	/// </summary>
+	/// <param name="c"></param>
+	/// <returns>String of the nation</returns>
+	CString UCharToNation(unsigned char c);
+
+	/// <summary>
+	/// Converts ShipType value to CString
+	/// </summary>
+	/// <param name="c">Ship type</param>
+	/// <returns>String of the ship type</returns>
+	CString UCharToShipType(unsigned char c);
+
+	/// <summary>
+	/// Converts gun size value to CString
+	/// </summary>
+	/// <param name="c">gun size</param>
+	/// <returns>String of the gun size</returns>
+	CString UCharToGunSize(char c);
+
+	/// <summary>
+	///  Converts number of main guns per turrets value to CString
+	/// </summary>
+	/// <param name="c"></param>
+	/// <returns>String of number of main guns per turrets</returns>
+	CString UCharToMainGun(unsigned char c);
+
+	/// <summary>
+	///  Converts number of sub guns per turrets value to CString
+	/// </summary>
+	/// <param name="c"></param>
+	/// <returns>String of number of sub guns per turrets</returns>
+	CString UCharToSubGun(unsigned char c);
+
+	/// <summary>
+	///  Converts number of guns per turrets value to CString
+	/// </summary>
+	/// <param name="c"></param>
+	/// <returns>String of number of guns per turrets</returns>
+	CString UCharToMonsuu(unsigned char c);
+
+	/// <summary>
+	///  Clear all data and columns in m_CtrlListMain.
+	/// </summary>
+	void ClearList();
+	afx_msg void OnBnClickedButtonShiptypeEdit();
 };

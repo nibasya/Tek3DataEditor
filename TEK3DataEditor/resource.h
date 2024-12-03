@@ -21,7 +21,6 @@
 #define IDC_BUTTON_BASE_EDIT            1009
 #define IDC_BUTTON1_SAVE                1010
 #define IDC_STATIC_FRAME                1011
-#define IDC_BUTTON_BASE_EDIT2           1011
 #define IDC_BUTTON_TIME_EDIT            1011
 #define IDC_EDIT_FOLDER                 1012
 #define IDC_EDIT_TARGETDATA             1013
